@@ -6,6 +6,7 @@ spec:
   ports:
   - port: 80
     targetPort: 80
+  type: LoadBalancer
   selector:
     app: guestbook-ui
 
@@ -16,14 +17,11 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: ingress-nginx
   rules:
   - http:
       paths:
       - path: /guest
         pathType: Prefix
         backend:
-          service: 
-            name: guestbook-ui
-            port:
-              number: 80
+          serviceName: guestbook-ui
+          servicePort: 80
