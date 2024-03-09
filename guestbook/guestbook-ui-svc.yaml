@@ -3,27 +3,10 @@ kind: Service
 metadata:
   name: guestbook-ui
 spec:
+  selector:
+    app: guestbook-ui
   ports:
   - port: 80
     targetPort: 80
   type: LoadBalancer
-  selector:
-    app: guestbook-ui
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: example-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /guest
-        pathType: Prefix
-        backend:
-         service:
-            name: guestbook-ui
-            port:
-              number: 80
+  
