@@ -10,7 +10,7 @@ spec:
   selector:
     app: guestbook-ui
 
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: example-ingress
@@ -20,8 +20,10 @@ spec:
   rules:
   - http:
       paths:
-      - path: /example
+      - path: /guest
         pathType: Prefix
         backend:
-          serviceName: guestbook-ui
-          servicePort: 80
+         service:
+            name: guestbook-ui
+            port:
+              number: 80
