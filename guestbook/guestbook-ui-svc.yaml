@@ -8,3 +8,22 @@ spec:
     targetPort: 80
   selector:
     app: guestbook-ui
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx-example
+  rules:
+  - http:
+      paths:
+      - path: /guest
+        pathType: Prefix
+        backend:
+          service: 
+            name: guestbook-ui
+            port:
+              number: 80
